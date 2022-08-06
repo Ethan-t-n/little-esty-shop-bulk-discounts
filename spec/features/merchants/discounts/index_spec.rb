@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "merchant discounts index", type: :feature do
 
-    it 'has a discounts for that merchant' do
+    it 'has discounts for that merchant' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
         merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
 
@@ -24,5 +24,19 @@ RSpec.describe "merchant discounts index", type: :feature do
 
         click_on("View Discount #{discount_1.id}")
         expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts/#{discount_1.id}")
+    end
+
+    it 'has a link to create a new discount' do
+        merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+    
+        discount_1 = Discount.create!(percent: 20, quantity_threshold: 10, merchant_id: merchant_1.id)
+        discount_2 = Discount.create!(percent: 10, quantity_threshold: 5, merchant_id: merchant_1.id)
+
+        visit "/merchants/#{merchant_1.id}/discounts"
+
+        expect(page).to have_content("Create a New Discount")
+
+        click_on("Create a New Discount")
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts/new")
     end
 end
