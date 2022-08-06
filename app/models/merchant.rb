@@ -9,6 +9,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
+  has_many :discounts, dependent: :destroy
 
 
   def top_5_customers
