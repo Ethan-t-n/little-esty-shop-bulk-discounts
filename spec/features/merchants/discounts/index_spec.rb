@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "merchant discounts index", type: :feature do
 
-    it 'has discounts for that merchant' do
+    it 'has a discount for that merchant' do
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
         merchant_2 = Merchant.create!(name: "Klein, Rempel and Jones", created_at: Time.now, updated_at: Time.now)
 
@@ -38,5 +38,24 @@ RSpec.describe "merchant discounts index", type: :feature do
 
         click_on("Create a New Discount")
         expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts/new")
+    end
+
+    it 'can delete a discount' do
+        merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
+    
+        discount_1 = Discount.create!(percent: 20, quantity_threshold: 10, merchant_id: merchant_1.id)
+        discount_2 = Discount.create!(percent: 10, quantity_threshold: 5, merchant_id: merchant_1.id)
+        discount_3 = Discount.create!(percent: 15, quantity_threshold: 8, merchant_id: merchant_1.id)
+
+        visit "/merchants/#{merchant_1.id}/discounts"
+
+        click_button("Delete Discount: #{discount_1.id}")
+
+        expect(current_path).to eq("/merchants/#{merchant_1.id}/discounts")
+        expect(page).to_not have_content("Percent Discount: 20%")
+        expect(page).to_not have_content("Quantity Threshold Of: 10")
+
+        expect(page).to have_content("Percent Discount: 10%")
+        expect(page).to have_content("Quantity Threshold Of: 5")
     end
 end
