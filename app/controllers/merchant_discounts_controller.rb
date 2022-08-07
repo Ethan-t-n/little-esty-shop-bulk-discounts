@@ -22,4 +22,9 @@ class MerchantDiscountsController < ApplicationController
           flash[:alert] = "Error: Please fill out all required fields!"
         end
     end
+
+    def destroy
+        Discount.find(params[:id]).destroy 
+        redirect_to "/merchants/#{params[:merchant_id]}/discounts"
+    end
 end
