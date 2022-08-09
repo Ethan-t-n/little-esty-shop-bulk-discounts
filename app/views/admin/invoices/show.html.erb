@@ -21,3 +21,6 @@
     <% end %>
 
 </div>
+
+<p>Total Revenue Before Discounts: <%=number_to_currency(@invoice.total_price / 100) %></p>
+<p>Total Revenue After Discounts: <%=number_to_currency((@invoice.total_price - @invoice.discount_total) / 100) %></p>
