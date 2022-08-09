@@ -9,7 +9,26 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :item 
   belongs_to :invoice 
-  has_many :transactions, through: :invoices 
+  # has_many :transactions, through: :invoices 
+  
   # has_many :invoices, through: :items 
+
+  def ii_discount_id 
+    item.merchant.discounts
+    .where('discounts.quantity_threshold <= ?', quantity)
+    .select('discounts.id as did, max(discounts.percent) as max')
+    .group('did')
+    .order('max desc')
+    .limit(1)   
+  end 
+ 
+  def item_total_with_no_discounts
+    unit_price * quantity
+  end
+
+  def available_discount
+      item.merchant.discounts.where('discounts.quantity_threshold <= ?', quantity)
+  end 
+  
 
 end

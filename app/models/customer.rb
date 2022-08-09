@@ -5,9 +5,9 @@ class Customer < ApplicationRecord
   validates_presence_of :updated_at
 
   has_many :invoices, dependent: :destroy
-  has_many :invoice_items, through: :invoices
-  has_many :items, through: :invoice_items
-  has_many :merchants, through: :items
+  # has_many :invoice_items, through: :invoices #1
+  # has_many :items, through: :invoice_items #2
+  # has_many :merchants, through: :items #3
   has_many :transactions, through: :invoices
 
   def name
