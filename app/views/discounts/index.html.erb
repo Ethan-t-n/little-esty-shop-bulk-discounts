@@ -10,3 +10,10 @@
         </div>
     <% end %>
 </div>
+
+<h3>Upcoming Holidays</h3>
+  <% search = HolidaySearch.new %>
+  <% search.holiday_info.each do |holiday| %>
+      <p>Name: <%= holiday.name %></p>
+      <p>Date: <%= holiday.date %></p>
+  <% end %>
