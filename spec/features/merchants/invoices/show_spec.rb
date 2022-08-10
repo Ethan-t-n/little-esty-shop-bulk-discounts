@@ -176,7 +176,7 @@ RSpec.describe 'invoices show page' do
           
         end
     end
-    it "can see a link to the show page for the bulk discount that was applied" do
+    it "can see a link to the show page for the bulk discount (if applied)" do
 
         merchant_1 = Merchant.create!(name: "Schroeder-Jerde", created_at: Time.now, updated_at: Time.now)
 
