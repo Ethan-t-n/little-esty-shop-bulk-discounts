@@ -33,12 +33,12 @@ RSpec.describe 'admin invoice show page' do
         
             expect(page.all(".item")[0]).to have_content("Watch")
             expect(page.all(".item")[0]).to have_content("Quantity: 1")
-            expect(page.all(".item")[0]).to have_content("Price: $30.00")
+            expect(page.all(".item")[0]).to have_content("Price: $3,000.00")
             expect(page.all(".item")[0]).to have_content("Status: shipped") 
 
             expect(page.all(".item")[1]).to have_content("Crocs")
             expect(page.all(".item")[1]).to have_content("Quantity: 2")
-            expect(page.all(".item")[1]).to have_content("Price: $40.00")
+            expect(page.all(".item")[1]).to have_content("Price: $4,000.00")
             expect(page.all(".item")[1]).to have_content("Status: pending") 
         end
     end
@@ -147,8 +147,8 @@ RSpec.describe 'admin invoice show page' do
 
         visit "admin/invoices/#{invoice_1.id}"
 
-        expect(page).to have_content("Total Revenue Before Discounts: $1,200.00")
-        expect(page).to have_content("Total Revenue After Discounts: $1,005.00")
+        expect(page).to have_content("Total Revenue Before Discounts: $120,000.00")
+        expect(page).to have_content("Total Revenue After Discounts: $100,500.00")
      end 
 
      it 'has shows the total both total and discounted for an invoice backup test ' do
@@ -172,7 +172,7 @@ RSpec.describe 'admin invoice show page' do
 
         visit "admin/invoices/#{invoice_1.id}"
 
-        expect(page).to have_content("Total Revenue Before Discounts: $1,710.00")
-        expect(page).to have_content("Total Revenue After Discounts: $1,458.00")
+        expect(page).to have_content("Total Revenue Before Discounts: $171,000.00")
+        expect(page).to have_content("Total Revenue After Discounts: $145,800.00")
      end 
 end
