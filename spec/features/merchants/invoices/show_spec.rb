@@ -40,15 +40,15 @@ RSpec.describe 'invoices show page' do
 
       expect(page).to have_content("Item Name: #{item_1.name}")
       expect(page).to have_content("Quantity Ordered: #{invoice_item_1.quantity}")
-      expect(page).to have_content("Item Price: $30.00")
+      expect(page).to have_content("Item Price: $3,000.00")
       expect(page).to have_content("Invoice Item Status: #{invoice_item_1.status}")
       expect(page).to have_content("Item Name: #{item_2.name}")
       expect(page).to have_content("Quantity Ordered: #{invoice_item_2.quantity}")
-      expect(page).to have_content("Item Price: $40.00")
+      expect(page).to have_content("Item Price: $4,000.00")
       expect(page).to have_content("Invoice Item Status: #{invoice_item_2.status}")
       expect(page).to have_content("Item Name: #{item_3.name}")
       expect(page).to have_content("Quantity Ordered: #{invoice_item_3.quantity}")
-      expect(page).to have_content("Item Price: $50.00")
+      expect(page).to have_content("Item Price: $5,000.00")
       expect(page).to have_content("Invoice Item Status: #{invoice_item_3.status}")
       expect(page).to_not have_content("#{item_4.name}")
     end
@@ -69,7 +69,7 @@ RSpec.describe 'invoices show page' do
 
       visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-      expect(page).to have_content("Total Invoice Revenue: $120.00")
+      expect(page).to have_content("Total Invoice Revenue: $12,000.00")
     end
 
     it 'can update the invoice item status' do
@@ -109,7 +109,7 @@ RSpec.describe 'invoices show page' do
 
         visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-        expect(page).to have_content("Total Merchant Revenue Before Discounts: $350.00")
+        expect(page).to have_content("Total Merchant Revenue Before Discounts: $35,000.00")
      end 
 
      it 'shows the total for an invoice before and after discounted' do
@@ -135,7 +135,7 @@ RSpec.describe 'invoices show page' do
 
         visit "/merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
 
-        expect(page).to have_content("Total Merchant Revenue Before Discounts: $700.00")
+        expect(page).to have_content("Total Merchant Revenue Before Discounts: $70,000.00")
         expect(page).to have_content("Total Merchant Revenue After Discounts: $605.00")
      end 
 
